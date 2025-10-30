@@ -1,5 +1,7 @@
 import json
 from login import *
+from interface import *
+#importa todos os usuários
 f = open("usuarios.json","r")
 usuarios = json.load(f)
 f.close()
@@ -12,14 +14,19 @@ for i in range(len(usuarios)):
         usuarios[i]["email"]        
         
     )
-    
-for n in range(len(usuarios)):    
-    print(usuarios[n].nome)
-    print(usuarios[n].email)
-    print(usuarios[n].usuario)
-    
-    
+#tela de login
+usuario,senha = Interface.telaLogin()
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+#exporta os usuários
 usuariosDicionario = [
     {
         "id": u.id,            # se você tiver um atributo id

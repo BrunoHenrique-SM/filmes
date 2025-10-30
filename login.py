@@ -73,17 +73,22 @@ class Login:
                 print("Senha incorreta")
     def confirmaUsuario(nomeUsuario,usuarios):
         for i in usuarios:
-            if nomeUsuario in usuarios:
-                return True
-        return False
+            if nomeUsuario == i.usuario:
+                return True,i.id
+        return False, -1
             
     def confirmaEmail(email,usuarios):
         for i in usuarios:
-            if email in usuarios:
-                return True
+            if email == i.email:
+                return True,i.id
+        return False,-1
+    
+    def confirmaSenha(senha,id,usuarios):
+        if senha == usuarios[id].senha:
+            return True
         return False
-                
-    def confirmaSenha(senha,nomes):
+    
+    def verificaSenha(senha,nomes):
         numero = False
         letra = False
         maiusculo = False
