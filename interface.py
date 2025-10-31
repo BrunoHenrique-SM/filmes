@@ -83,6 +83,12 @@ class App(ctk.CTk):
         self.erroUsuario.grid(row=6, column=0, pady=10, padx=10)
         self.erroSenha = ctk.CTkLabel(self.frameLogin,text='')
         self.erroSenha.grid(row=7, column=0, pady=10, padx=10)
+        self.erroUsuario.configure(text="Usuário inválido",
+                text_color="red")
+        self.erroSenha.configure(text="Senha errada",
+                text_color="red")
+        self.erroUsuario.grid_remove()
+        self.erroSenha.grid_remove()
         
         
     def voltarParaLogin(self):
@@ -236,24 +242,33 @@ class App(ctk.CTk):
         return usuario,senha
     
     def confirmaLogin(self,usuario,senha,usuarios):
+        self.erroLogin = ctk.CTkLabel(self.frameLogin,text='Preencha todos os campos!',font=fonteNormal,text_color=corVermelha)        
+        self.erroLogin.grid(row=6,column=0)
+        self.erroLogin.grid_remove()
         
         usuario,senha = self.capturaLogin(usuario,senha)
         confirmacaoUsuario,id = Login.confirmaUsuario(usuario,usuarios)
-        if confirmacaoUsuario == False:
-            confirmacaoEmail,id = Login.confirmaEmail(usuario,usuarios)
-        if id >= len(usuarios):
-            self.erroUsuario.configure(text="Usuário inválido",
-            text_color="red")
-        confirmacaoSenha = Login.confirmaSenha(senha,id,usuarios)
-        if confirmacaoSenha:
-            #entra no programa
-            #botão de logout
-            self.interfaceCatalogo()
-            print("Logado com sucesso")
+        if usuario=="" or senha=="":
+            self.erroLogin.grid()
+            
+            
         else:
-            #repete processo
-            self.erroSenha.configure(text="Senha errada",
-            text_color="red")
+            self.erroLogin.grid_remove()
+            if confirmacaoUsuario == False:
+                confirmacaoEmail,id = Login.confirmaEmail(usuario,usuarios)
+            if id >= len(usuarios):
+                
+                self.erroUsuario.grid()
+            confirmacaoSenha = Login.confirmaSenha(senha,id,usuarios)
+            if confirmacaoSenha:
+                #entra no programa
+                #botão de logout
+                self.interfaceCatalogo()
+                print("Logado com sucesso")
+            else:
+                #repete process
+                
+                self.erroSenha.grid()
             
     def interfaceCatalogo(self):
         self.frameLogin.place_forget()
