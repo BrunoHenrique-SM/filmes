@@ -2,7 +2,7 @@ import requests
 from tkinter import *
 from sistema import *
 class Login:
-    def __init__(self,id,nome,usuario,senha,email):
+    def __init__(self,id,nome,email,usuario,senha):
         self.id = id
         self.nome = nome
         self.email = email
@@ -16,7 +16,12 @@ class Login:
         if n = -1:
             return "Usuário ou email não encontrado"
         else:'''
-            
+    def separaNome(nome):
+        nomesLista = [x.upper() for x in nome.split()]
+        for i in nomesLista:
+            if len(i) <=2:
+                nomesLista.remove(i)
+        return nomesLista
     def criaUsuario(usuarios):
         print("Nome")
         nome = Sistema.capturaNome()
@@ -75,18 +80,21 @@ class Login:
         for i in usuarios:
             if nomeUsuario == i.usuario:
                 return True,i.id
-        return False, -1
+        return False, len(usuarios)
             
     def confirmaEmail(email,usuarios):
         for i in usuarios:
             if email == i.email:
                 return True,i.id
-        return False,-1
+        return False,len(usuarios)
     
-    def confirmaSenha(senha,id,usuarios):
-        if senha == usuarios[id].senha:
-            return True
-        return False
+    def confirmaSenha(senha, id, usuarios):
+        try:
+            if senha == usuarios[id].senha:
+                return True
+            return False
+        except IndexError:
+            return False
     
     def verificaSenha(senha,nomes):
         numero = False
