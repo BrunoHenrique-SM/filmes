@@ -1,7 +1,15 @@
 import json
-from filmes import *
+from filmes import *            
+#class Sistema:    
+class Login:
+    def __init__(self,id,nome,email,usuario,senha):
+        self.id = id
+        self.nome = nome
+        self.email = email
+        self.usuario = usuario
+        self.senha = senha
+        self.filmes = []
 
-class Sistema:
     def importaUsuarios():
         f = open("usuarios.json","r")
         usuarios = json.load(f)
@@ -32,19 +40,6 @@ class Sistema:
         f = open("usuarios.json","w")
         json.dump(usuariosDicionario,f)
         f.close()
-
-            
-    
-class Login:
-    def __init__(self,id,nome,email,usuario,senha):
-        self.id = id
-        self.nome = nome
-        self.email = email
-        self.usuario = usuario
-        self.senha = senha
-        self.filmes = []
-
-
     def separaNome(nome):
         nomesLista = [x.upper() for x in nome.split()]
         for i in nomesLista:
@@ -103,4 +98,4 @@ class Login:
         else:    
             return False
         
-usuarios = Sistema.importaUsuarios()
+usuarios = Login.importaUsuarios()

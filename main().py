@@ -100,6 +100,10 @@ class App(ctk.CTk):
             font=fonteNormal
         )
         self.botaoLogin.grid(row=4, column=0, pady=10, padx=10)
+        self.frameLogin.focus_set()
+        self.campoUsuario.bind("<Return>", lambda e: self.botaoLogin.invoke())
+        self.campoSenha.bind("<Return>", lambda e: self.botaoLogin.invoke())
+
 
         # Botão de cadastro
         self.botaoCadastro = ctk.CTkButton(
@@ -251,7 +255,15 @@ class App(ctk.CTk):
             hover_color=corVermelhaEscura,
             font=fonteNormal
         )
+        
+        for fld in (self.campoNomeCadastro,
+            self.campoUsuarioCadastro,
+            self.campoEmail,
+            self.campoSenha,
+            self.campoConfirmaSenha):
+            fld.bind("<Return>", lambda e, b=self.botaoCadastrar: b.invoke())
         self.botaoCadastrar.grid(row=5, column=0, pady=10, padx=10)
+        
 
     def capturaCadastro(self, nome, usuario, email, senha, confirmaSenha):
         nome = nome.get()
@@ -276,7 +288,7 @@ class App(ctk.CTk):
         confirmaUsuario, id = Login.confirmaUsuario(usuario, usuarios)
         confirmaEmail, id = Login.confirmaEmail(email, usuarios)
         nomes = Login.separaNome(nome)
-        print(nomes)
+        
         senhaVerificada = Login.verificaSenha(senha, nomes)
 
         if nome == '' or usuario == '' or email == '' or senha == '' or confirmaSenha == '':
@@ -365,6 +377,8 @@ class App(ctk.CTk):
                     self.erroSenha.grid()
 
     def limpaTela(self):
+        self.frameLogin.winfo_toplevel().focus_set()
+
         try:
             self.frameCadastro.place_forget()
         except Exception:
@@ -393,6 +407,9 @@ class App(ctk.CTk):
 
     
     def pesquisa(self):
+        self.filme0 = 0
+        self.filme1 = 1
+        self.filme2 = 2
         self.alteraAmostra(filmesLista)
         self.alteraQuantidade()
         self.filtrosVar.extend([
@@ -735,7 +752,7 @@ class App(ctk.CTk):
         self.diretor.grid(row=1,column=0,sticky="n",pady=2)
         self.sinopse.grid(row=2,column=0,pady=(30,10),sticky="n")
     def fechaJanela(self):
-        Sistema.exportaUsuarios()
+        Login.exportaUsuarios()
         self.destroy()
         
         
