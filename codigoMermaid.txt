@@ -1,0 +1,61 @@
+classDiagram
+    %% Classes principais
+    class App {
+      - filme0:int
+      - filme1:int
+      - filme2:int
+      - filmesAmostra:list<Filmes>
+      - filtrosVar:list<BooleanVar>
+      +interfaceLogin()
+      +interfaceCatalogo()
+      +interfaceFilme(filmeID)
+      +pesquisa()
+      +fechaJanela()
+    }
+
+    class Filmes {
+      - codigo
+      - titulo
+      - sinopse
+      - genero
+      - diretor
+      - ano
+      - capa
+      - trailer
+      +exportaFilmes(filmesLista)
+      +importaFilmes()
+      +importaCapa(url,size)
+      +abreTrailer(url)
+    }
+
+    class Filtro {
+      +geraFiltros(lista)
+      +filtraFilmes(filtros)
+      
+    }
+
+    class Sistema {
+      +importaUsuarios()
+      +exportaUsuarios()
+    }
+
+    class Login {
+      - id
+      - nome
+      - email
+      - usuario
+      - senha
+      - filmes:list
+      +separaNome(nome)
+      +confirmaUsuario(nomeUsuario,usuarios)
+      +confirmaEmail(email,usuarios)
+      +confirmaSenha(senha,id,usuarios)
+      +verificaSenha(senha,nomes)
+    }
+
+    %% Relações
+    App "1" --> "0..*" Filmes : usa / exibe
+    App "1" --> "1" Sistema : chama exporta/importa ao fechar
+    App "1" --> "0..*" Login : manipula (via Sistema.importaUsuarios)
+    Filmes "1" <-- "0..1" Filtro : consulta (usa Filtro.filtraFilmes)
+    Sistema "1" --> "0..*" Login : instancia (importaUsuarios retorna Login)
