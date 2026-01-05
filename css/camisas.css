@@ -1,0 +1,12 @@
+*{
+    text-decoration: none;
+    list-style: none;
+}
+
+details>summary{
+    text-decoration: none;
+}
+
+.filtros{
+    background-color: aqua;
+}
