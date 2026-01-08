@@ -1,6 +1,118 @@
 *{
-    background-color: #bb9457;
+    
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-decoration: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
+}
+
+header  a{
+    color: oklch(64.6% 0.222 41.116);
+    
+}
+header{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+    
+    background-color: rgb(187, 187, 187);
+}
+
+header h1{
+    padding: 10px 0px 10px 50px;
+    
+}
+header nav{
+    padding: 10px 0px 10px 0px;
+    
+
+}
+header nav ul{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    
+    margin-left: 350px;
+}
+
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+.carrosselPrincipal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px;
+}
+
+.carrossel {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    padding: 10px 220px;
+}
+
+.carrossel article {
+    
+    text-align: center;
+    
+}
+
+.carrossel a{
+    color: black;
+}
+
+.carrossel img {
+    width: 100%;
+    height: 200px;
+}
+
+.banner2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    height: 150px;
+    gap: 20px;
+}
+
+footer a{
+    color: white;
+}
+
+.direitos{
+    text-align: center  ;
+
+}
+
+.direitos p{
+    margin: 5px 0px 0px 0px;
+
+}
+
+
+.carrossel article{
+    transition: .35s;
+    cursor: pointer;
+}
+
+.carrossel:hover > :not(:hover){
+    opacity: 4;
+    transform: scale(0.9);
 }
